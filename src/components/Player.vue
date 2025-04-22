@@ -1,6 +1,10 @@
 <template>
     <div>
-
+        <h1>Players cards</h1>
+        <ol>
+            <li v-for="card in playerCards">{{ card }}</li>
+            <p>{{ playerScore }}</p>
+        </ol>
     </div>
 </template>
 
@@ -25,11 +29,13 @@
             // Call the hit method twice to give the user two starting cards
             this.hit();
             this.hit();
+            console.log("Player.vue mounted")
+            this.calculateScore();
         },
         methods: {
             hit() {
                 // Get the card at the end of the deck array
-                const card = deck.pop();
+                const card = this.deck.pop();
                 // Push the removed card into the playerCards array
                 this.playerCards.push(card);
                 // Call the calculateScore method
@@ -44,6 +50,7 @@
                 this.playerCards.forEach((card) => {
                     // Use split to get the rank of the card
                     const rank = card.split(" ")[0]
+                    console.log(rank);
                     // Check the rank of the card
                     switch(rank){
                         // If the card is an ace
@@ -55,7 +62,9 @@
                             // Break out of the switch statement
                             break;
                         // If the card is a face card
-                        case ["K", "Q", "J"].includes(rank):
+                        case "K":
+                        case "Q":
+                        case "J":
                             // Add 10 to playerScore
                             this.playerScore += 10;
                             // Break out of the switch statement
@@ -66,6 +75,7 @@
                             this.playerScore += Number(rank);
                     }
                 });
+                this.aces();
             },
             aces(){
                 // If playerScore is too high and they have aces remove them

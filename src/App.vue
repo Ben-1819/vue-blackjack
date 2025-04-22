@@ -2,7 +2,9 @@
   <main>
     <h1>Vue Blackjack</h1>
     <p v-if="!playing">Click the button below to play</p>
-    <button>Start</button>
+    <button @click="startGame">Start</button>
+    <Player v-if="playerTurn"
+      :deck="this.deck"/>
   </main>
 </template>
 
@@ -63,10 +65,18 @@ export default{
       }
     },
     resetGame(){
+      // Set the deck array back to empty
       this.deck = []
+      // Set playerTurn to false
       this.playerTurn = false
+      // Set dealerTurn to false
       this.dealerTurn = false
+      // Call the setupDeck method
       this.setupDeck()
+    },
+    startGame(){
+      // Set playerTurn to true to show the player component
+      this.playerTurn = true
     }
   },
 }

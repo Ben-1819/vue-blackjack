@@ -1,6 +1,6 @@
 <template>
     <div>
-
+        
     </div>
 </template>
 
@@ -15,6 +15,11 @@
                 // Create the playerAces variable, it begins at 0
                 playerAces: 0,
             }
+        },
+        props: {
+            deck: {
+                type: Array,
+            },
         },
     }
 </script>

@@ -4,7 +4,8 @@
     <p v-if="!playing">Click the button below to play</p>
     <button @click="startGame">Start</button>
     <Player v-if="playerTurn"
-      :deck="this.deck"/>
+      :deck="this.deck"
+      @playerDone="playerOver"/>
   </main>
 </template>
 
@@ -77,6 +78,11 @@ export default{
     startGame(){
       // Set playerTurn to true to show the player component
       this.playerTurn = true
+    },
+    swapTurn(deck){
+      this.deck = deck;
+      this.playerTurn = false;
+      this.dealerTurn = true;
     }
   },
 }

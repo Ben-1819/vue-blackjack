@@ -4,7 +4,7 @@
         <ol>
             <li v-for="card in playerCards">{{ card }}</li>
             <p>{{ playerScore }}</p>
-            <button @click="hit">Hit</button><button>Stand</button>
+            <button @click="hit">Hit</button><button @click="stand">Stand</button>
         </ol>
     </div>
 </template>
@@ -87,6 +87,9 @@
                     this.playerAces--;
                 }
                 return this.playerScore
+            },
+            stand(){
+                this.$emit("playerDone", this.deck);
             }
         },
     }

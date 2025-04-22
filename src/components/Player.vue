@@ -66,6 +66,8 @@
                             this.playerScore += Number(rank);
                     }
                 });
+            },
+            aces(){
                 // If playerScore is too high and they have aces remove them
                 while(this.playerScore > 21 && playerAces > 0){
                     // Remove 10 from playerScore
@@ -73,6 +75,7 @@
                     // Remove 1 from playerAces
                     this.playerAces--;
                 }
+                return this.playerScore
             }
         },
     }

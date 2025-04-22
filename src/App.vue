@@ -1,6 +1,8 @@
 <template>
   <main>
-    
+    <h1>Vue Blackjack</h1>
+    <p v-if="!playing">Click the button below to play</p>
+    <button>Start</button>
   </main>
 </template>
 
@@ -24,6 +26,15 @@ export default{
     // Call the setupDeck method when the component is mounted
     this.setupDeck();
     console.log(this.deck);
+  },
+  computed: {
+    playing() {
+      if(this.playerTurn == true || this.dealerTurn == true){
+        return true;
+      }else{
+        return false;
+      }
+    }
   },
   methods: {
     setupDeck() {

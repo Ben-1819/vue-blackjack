@@ -50,6 +50,12 @@ export default{
         // Swap the last item with the position of the temp item
         this.deck[i] = temp;
       }
+    },
+    resetGame(){
+      this.deck = []
+      this.playerTurn = false
+      this.dealerTurn = false
+      this.setupDeck()
     }
   },
 }

@@ -26,6 +26,20 @@
                 type: Array,
             },
         },
+        watch: {
+            playerScore() {
+                // Check if players score is greater than 21
+                if(this.playerScore > 21){
+                    // If players score is greater than 21 call the aces function
+                    this.aces()
+                    // Check if players score is still greater than 21
+                    if(this.playerScore > 21){
+                        // If players score is still greater than 21 stand
+                        this.stand()
+                    }
+                }
+            }
+        },
         mounted () {
             // Call the hit method twice to give the user two starting cards
             this.hit();
@@ -89,8 +103,10 @@
                 return this.playerScore
             },
             stand(){
+                // Emits the custom event playerDone and sends the variable deck back
+                // To App.vue
                 this.$emit("playerDone", this.deck);
-            }
+            },
         },
     }
 </script>

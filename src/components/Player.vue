@@ -4,6 +4,7 @@
         <ol>
             <li v-for="card in playerCards">{{ card }}</li>
             <p>{{ playerScore }}</p>
+            <button @click="hit">Hit</button><button>Stand</button>
         </ol>
     </div>
 </template>
@@ -79,7 +80,7 @@
             },
             aces(){
                 // If playerScore is too high and they have aces remove them
-                while(this.playerScore > 21 && playerAces > 0){
+                while(this.playerScore > 21 && this.playerAces > 0){
                     // Remove 10 from playerScore
                     this.playerScore -= 10;
                     // Remove 1 from playerAces

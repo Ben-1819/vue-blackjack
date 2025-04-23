@@ -3,7 +3,7 @@
         <h1>Players cards</h1>
         <ol>
             <li v-for="card in playerCards">{{ card }}</li>
-            <p>{{ playerScore }}</p>
+            <p>Player score: {{ playerScore }}</p>
             <button v-if="lowEnough" @click="hit">Hit</button><button v-if="lowEnough" @click="stand">Stand</button>
         </ol>
     </div>
@@ -116,9 +116,11 @@
             stand(){
                 // Set playerStand to true
                 this.playerStand = true;
+                // Create the playerData variable which is an array containing the players score and the players cards
+                const playerData = [this.playerScore, this.playerCards];
                 // Emits the custom event playerDone and sends the variable deck back
                 // To App.vue
-                this.$emit("playerDone", this.deck);
+                this.$emit("playerDone", this.deck, playerData);
                 
             },
         },

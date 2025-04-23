@@ -3,6 +3,8 @@
         <h1>Results</h1>
         <p>Player Score: {{ playerScore }}</p>
         <p>Dealer Score: {{ dealerScore }}</p>
+        <p v-show="this.winner != null">The winner is: {{ winner }}<br>{{ winner }} won because: {{ reason }}</p>
+        <button v-show="this.showHome" @click="gameEnd">Back to home</button>
     </div>
 </template>
 
@@ -14,10 +16,15 @@
                 winner: null,
                 // Create the reason variable and set it to null
                 reason: null,
+                // Create showHome variable and set it to false
+                showHome: false,
             }
         },
         mounted () {
             this.getWinner();
+            setTimeout(() => {
+                this.showHome = true
+            }, 2000)
         },
         props: {
             // playerScore prop, contains the playerScore variable
@@ -76,6 +83,10 @@
                     // Set the reason variable to an explanation of why the player won
                     this.reason = "Both the player and the dealer scored below 21 and the player scored higher than the dealer, player wins";
                 }
+            },
+            gameEnd(){
+                // Emit the custom event gameFinished back to App.vue
+                this.$emit("gameFinished");
             },
         },
     }

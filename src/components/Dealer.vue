@@ -100,7 +100,8 @@
                 return this.dealerScore
             },
             stand(){
-
+                // Emits the custom event dealerDone
+                this.$emit("dealerDone");
             },
         },
     }

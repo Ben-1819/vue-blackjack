@@ -110,8 +110,10 @@
                 return this.dealerScore
             },
             stand(){
+                // Create the variable dealerData
+                const dealerData = [this.dealerScore, this.dealerCards];
                 // Emits the custom event dealerDone
-                this.$emit("dealerDone");
+                this.$emit("dealerDone", dealerData);
             },
         },
     }

@@ -1,9 +1,10 @@
 <template>
     <div>
-        <h1>Dealers Score</h1>
+        <h1>Dealers Hand</h1>
         <ol>
-            <li></li>
+            <li v-for="card in dealerCards">{{ card }}</li>
         </ol>
+        <p>Dealers Score: {{ dealerScore }}</p>
     </div>
 </template>
 
@@ -57,7 +58,7 @@
                     const rank = card.split(" ")[0]
                     console.log(rank);
                     // Check the rank of the card
-                    switch(card){
+                    switch(rank){
                         // If the card is an ace
                         case "A":
                             // Add 11 to dealerScore

@@ -19,6 +19,8 @@
                 playerScore: 0,
                 // Create the playerAces variable, it begins at 0
                 playerAces: 0,
+                // Create the playerStand variable and set it to false
+                playerStand: false,
             }
         },
         props: {
@@ -42,7 +44,7 @@
         },
         computed: {
             lowEnough() {
-                if(this.playerScore <= 21){
+                if(this.playerStand === false){
                     return true;
                 }else{
                     return false;
@@ -112,10 +114,12 @@
                 return this.playerScore
             },
             stand(){
+                // Set playerStand to true
+                this.playerStand = true;
                 // Emits the custom event playerDone and sends the variable deck back
                 // To App.vue
                 this.$emit("playerDone", this.deck);
-                this.lowEnough = false;
+                
             },
         },
     }

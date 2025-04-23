@@ -89,7 +89,15 @@
                 this.aces()
             },
             aces(){
-
+                // If dealerScore is too high and they have aces remove them
+                while(this.dealerScore > 21 && this.dealerAces > 0){
+                    // Remove 10 from dealerScore
+                    this.dealerScore -= 10;
+                    // Remove 1 from dealerAces
+                    this.dealerAces--;
+                }
+                // Return dealerScore
+                return this.dealerScore
             },
             stand(){
 

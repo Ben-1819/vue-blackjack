@@ -4,7 +4,7 @@
         <ol>
             <li v-for="card in playerCards">{{ card }}</li>
             <p>{{ playerScore }}</p>
-            <button @click="hit">Hit</button><button @click="stand">Stand</button>
+            <button v-if="lowEnough" @click="hit">Hit</button><button v-if="lowEnough" @click="stand">Stand</button>
         </ol>
     </div>
 </template>
@@ -37,6 +37,15 @@
                         // If players score is still greater than 21 stand
                         this.stand()
                     }
+                }
+            }
+        },
+        computed: {
+            lowEnough() {
+                if(this.playerScore <= 21){
+                    return true;
+                }else{
+                    return false;
                 }
             }
         },
@@ -106,6 +115,7 @@
                 // Emits the custom event playerDone and sends the variable deck back
                 // To App.vue
                 this.$emit("playerDone", this.deck);
+                this.lowEnough = false;
             },
         },
     }

@@ -1,11 +1,20 @@
 <template>
   <main>
     <h1>Vue Blackjack</h1>
-    <p v-if="!playing">Click the button below to play</p>
-    <button @click="startGame">Start</button>
+    <p v-show="!playing">Click the button below to play</p>
+    <button v-show="!playing" @click="startGame">Start</button>
     <Player v-if="playerTurn"
       :deck="this.deck"
-      @playerDone="playerOver"/>
+      @playerDone="swapTurn"/>
+    <Dealer v-if="dealerTurn" 
+      :deck="this.deck"
+      @dealerDone="showResults"/>
+      <Results v-if="gameOver" 
+        :player-score="this.playerScore"
+        :dealer-score="this.dealerScore"
+        :player-cards="this.playerCards"
+        :dealer-cards="this.dealerCards"
+        @gameFinished="resetGame"/>
   </main>
 </template>
 
@@ -23,6 +32,16 @@ export default{
       playerTurn: false,
       // Create the dealerTurn variable and set it to false
       dealerTurn: false,
+      // Create the gameOver variable and set it to false
+      gameOver: false,
+      // Create the playerCards variable and set it to null
+      playerCards: null,
+      // Create the playerScore variable and set it to null
+      playerScore: null,
+      // Create the dealerCards variable and set it to null
+      dealerCards: null,
+      // Create the dealerScore variable and set it to null
+      dealerScore: null,
     }
   },
   mounted () {
@@ -32,7 +51,7 @@ export default{
   },
   computed: {
     playing() {
-      if(this.playerTurn == true || this.dealerTurn == true){
+      if(this.playerTurn == true || this.dealerTurn == true || this.gameOver == true){
         return true;
       }else{
         return false;
@@ -67,11 +86,13 @@ export default{
     },
     resetGame(){
       // Set the deck array back to empty
-      this.deck = []
+      this.deck = [];
       // Set playerTurn to false
-      this.playerTurn = false
+      this.playerTurn = false;
       // Set dealerTurn to false
-      this.dealerTurn = false
+      this.dealerTurn = false;
+      // Set gameOver to false
+      this.gameOver = false;
       // Call the setupDeck method
       this.setupDeck()
     },
@@ -79,11 +100,35 @@ export default{
       // Set playerTurn to true to show the player component
       this.playerTurn = true
     },
-    swapTurn(deck){
+    swapTurn(deck, playerData){
+      // Set deck to the deck passed back by Player.vue
       this.deck = deck;
-      this.playerTurn = false;
+      // Set playerScore to the first index of playerData
+      this.playerScore = playerData[0];
+      // Set playerCards to the second index of playerData
+      this.playerCards = playerData[1];
+      console.log("Player score in App.vue:"+this.playerScore);
+      console.log("Player cards in App.vue:"+this.playerCards);
+      // Set dealerTurn to true
       this.dealerTurn = true;
-    }
+    },
+    showResults(dealerData){
+      // Set dealerScore to be the first index of dealerData
+      this.dealerScore = dealerData[0];
+      // set dealerCards to be the second index of dealerData
+      this.dealerCards = dealerData[1];
+      console.log("Dealer score in App.vue:"+this.dealerScore);
+      console.log("Dealer cards in App.vue:"+this.dealerCards);
+      setTimeout(() => {
+        // Set playerTurn to false
+        this.playerTurn = false;
+        // Set dealerTurn to false
+        this.dealerTurn = false;
+        // set gameOver to true
+        this.gameOver = true;
+      }, 5000)
+      
+    },
   },
 }
 </script>

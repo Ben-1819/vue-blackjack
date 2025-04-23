@@ -22,9 +22,18 @@
                 // If dealers score is less than 17 then hit
                 if(this.dealerScore < 17){
                     this.hit()
-                }// If the dealers score is 17 or more then stand
-                else{
+                }
+                // If the dealers score is between 17 and 21 then stand
+                else if(this.dealerScore >= 17 && dealerScore <= 21){
                     this.stand();
+                }
+                // If the dealers score is greater than 21 call the aces method
+                else if(this.dealerScore > 21){
+                    this.aces();
+                    // If dealerScore is still greater than 21 then stand
+                    if(this.dealerScore > 21){
+                        this.stand();
+                    }
                 }
             }
         },

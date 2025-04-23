@@ -24,7 +24,7 @@
                     this.hit()
                 }
                 // If the dealers score is between 17 and 21 then stand
-                else if(this.dealerScore >= 17 && dealerScore <= 21){
+                else if(this.dealerScore >= 17 && this.dealerScore <= 21){
                     this.stand();
                 }
                 // If the dealers score is greater than 21 call the aces method
